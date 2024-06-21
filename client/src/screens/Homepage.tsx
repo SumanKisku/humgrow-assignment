@@ -10,7 +10,7 @@ const Homepage = () => {
         </h1>
         <div className="flex gap-4 justify-center mt-10">
           <Link to={"/signup"}>
-            <Button>Sign Up</Button>
+            <Button variant="outline">Sign Up</Button>
           </Link>
           <Link to={"/login"}>
             <Button>Log In</Button>
