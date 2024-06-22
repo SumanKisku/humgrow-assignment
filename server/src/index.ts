@@ -1,15 +1,31 @@
-import { Request, Response } from "express"
+import { Application, Request, Response } from "express"
 
-const express = require('express')
-const app = express()
-const port = 3000
+import express from "express";
+import cors from "cors";
+import userRouter from "./routes/user"
+import { connectDb, connectSession } from "./connections";
 
-app.get('/', (req: Request, res: Response) => {
+require("dotenv").config();
+
+const app: Application = express();
+const port = 3000;
+const mongo_url = process.env.MONGO_URL as string;
+
+app.use(cors());
+app.use(express.json());
+
+connectDb(mongo_url);
+app.use(connectSession(mongo_url));
+
+app.get("/", (req: Request, res: Response) => {
     res.json({
         status: 'ok',
         message: "Hello world",
     })
 })
+
+app.use("/api/user", userRouter)
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
