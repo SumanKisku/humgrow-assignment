@@ -48,7 +48,7 @@ const SignupPage = () => {
     // ✅ This will be type-safe and validated.
 
     // Send to the backend
-    await fetch("http://localhost:3000/api/signup", {
+    await fetch("http://localhost:3000/api/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
