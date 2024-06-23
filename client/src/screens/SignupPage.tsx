@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z
@@ -32,14 +33,14 @@ const formSchema = z
 
 const SignupPage = () => {
   const { toast } = useToast();
-
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "Suman Kisku",
       email: "sumankisku1@gmail.com",
-      password: "sumankisku",
-      confirm: "sumankisku",
+      password: "12345678",
+      confirm: "12345678",
     },
   });
 
@@ -60,8 +61,10 @@ const SignupPage = () => {
         toast({
           variant: "destructive",
           title: "User already exists",
-          description: "Try another email instead"
+          description: "Try another email instead",
         });
+      } else {
+        navigate("/dashboard");
       }
     });
   };
