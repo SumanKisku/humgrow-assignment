@@ -12,6 +12,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -21,12 +22,13 @@ const formSchema = z.object({
 
 const LoginPage = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "sumankisku1@gmail.com",
-      password: "sumankisku",
+      password: "12345678",
     },
   });
 
@@ -40,6 +42,7 @@ const LoginPage = () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(values),
     }).then(async (data) => {
       const result = await data.json();
@@ -50,6 +53,8 @@ const LoginPage = () => {
           description: "Invalid credentials, try again or signup",
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
+      } else {
+        navigate("/dashboard");
       }
     });
   };
