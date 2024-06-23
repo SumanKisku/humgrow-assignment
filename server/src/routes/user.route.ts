@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { loginUserAsync, logoutUserAsync, signupUserAsync } from "../controllers/user";
+import { loginUserAsync, logoutUserAsync, signupUserAsync } from "../controllers/user.controller";
 const router = express.Router();
 
 router.post("/signup", signupUserAsync);

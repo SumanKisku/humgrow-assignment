@@ -1,7 +1,7 @@
 import { ZodError, z } from "zod";
 import bcrypt from "bcrypt";
 
-import User from "../models/user";
+import User from "../models/user.model";
 import { Request, Response } from "express";
 
 const saltRounds = 10;
@@ -76,18 +76,18 @@ export const loginUserAsync = async (req: Request, res: Response) => {
         // User exists
         // check password match or not
         bcrypt.compare(password, user.password, function (err, result) {
-            if (result) {
-                // user login successful
-                req.session.user = { email: user.email };
-                return res.status(200).json({
-                    status: "ok",
-                    message: "logged in successful",
-                })
-            } else {
+            if (!result) {
                 return res.status(200).json({
                     status: "not ok",
                     message: "password doesn't match",
                 })
+            } else {
+                // user login successful
+                req.session.user = { email: user.email, role: user.role };
+                return res.status(200).json({
+                    status: "ok",
+                    message: "logged in successful",
+                });
             }
         });
     } catch (err) {
