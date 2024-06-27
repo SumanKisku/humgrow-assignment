@@ -8,6 +8,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -25,12 +32,14 @@ const formSchema = z
     email: z.string().email().min(5),
     password: z.string().min(8),
     confirm: z.string().min(8),
+    role: z.string(),
   })
   .refine((data) => data.password === data.confirm, {
     message: "Passwords doesn't match",
     path: ["confirm"],
   });
 
+const roles = ["Canditate", "Recruiter", "Employer"];
 const SignupPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -41,12 +50,14 @@ const SignupPage = () => {
       email: "sumankisku1@gmail.com",
       password: "12345678",
       confirm: "12345678",
+      role: "candidate",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    console.log(values);
 
     // Send to the backend
     await fetch("http://localhost:3000/api/user/signup", {
@@ -129,6 +140,31 @@ const SignupPage = () => {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>You are</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a verified email to display" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {roles.map((role) => (
+                        <SelectItem key={role} value={`${role.toLocaleLowerCase()}`}>{role}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

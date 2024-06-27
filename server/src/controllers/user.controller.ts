@@ -17,7 +17,7 @@ const signupForm = z.object({
 export const signupUserAsync = async (req: Request, res: Response) => {
     try {
         // Validating user data and destructuring
-        const { name, email, password } = signupForm.parse(req.body);
+        const { name, email, password, role } = signupForm.parse(req.body);
         // Check no user using this email already
         const user = await User.findOne({
             email
@@ -34,7 +34,7 @@ export const signupUserAsync = async (req: Request, res: Response) => {
         bcrypt.genSalt(saltRounds, function (err, salt) {
             bcrypt.hash(password, salt, function (err, hash) {
                 const newUser = new User({
-                    email, name, password: hash, role: "candidate"
+                    email, name, password: hash, role
                 });
                 newUser.save();
             });
