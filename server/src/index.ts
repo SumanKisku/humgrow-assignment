@@ -30,14 +30,7 @@ app.get("/", (req: Request, res: Response) => {
     })
 })
 
-app.get("/private", isAuthenticated, isRoleCanditate, (req: Request, res: Response) => {
-    return res.status(200).json({
-        status: "ok",
-        message: "You're authenticated",
-    })
-})
-
-app.use("/api/user", userRouter)
+app.use("/api/user", userRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
