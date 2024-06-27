@@ -3,6 +3,8 @@ import Homepage from "./screens/Homepage";
 import SignupPage from "./screens/SignupPage";
 import LoginPage from "./screens/LoginPage";
 import JobListingPage from "./screens/JobListingPage";
+import AdminPage from "./screens/AdminPage";
+import DashboardPage from "./screens/DashboardPage";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/signup" Component={SignupPage} />
         <Route path="/login" Component={LoginPage} />
         <Route path="/jobs" Component={JobListingPage} />
+        <Route path="/admin" Component={AdminPage} />
+        <Route path="/dashboard" Component={DashboardPage} />
       </Routes>
     </BrowserRouter>
   );

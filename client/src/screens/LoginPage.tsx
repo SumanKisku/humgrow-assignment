@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { UserRoleEnum } from "@/constants"; 
 
 const formSchema = z.object({
   email: z.string().email().min(5),
@@ -23,7 +24,7 @@ const formSchema = z.object({
 const LoginPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,7 +55,11 @@ const LoginPage = () => {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
-        navigate("/dashboard");
+        if (result.data.role === UserRoleEnum.Values.candidate) {
+          navigate("/dashboard");
+        } else if (result.data.role === UserRoleEnum.Values.admin) {
+          navigate("/admin");
+        }
       }
     });
   };
