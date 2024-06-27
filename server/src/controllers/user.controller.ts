@@ -43,6 +43,7 @@ export const signupUserAsync = async (req: Request, res: Response) => {
         res.json({
             status: "ok",
             message: "signed up",
+            data: { email: email, role: "candidate" }
         });
     } catch (err) {
         if (err instanceof ZodError) {
@@ -87,6 +88,7 @@ export const loginUserAsync = async (req: Request, res: Response) => {
                 return res.status(200).json({
                     status: "ok",
                     message: "logged in successful",
+                    data: req.session.user,
                 });
             }
         });
@@ -105,5 +107,23 @@ export const logoutUserAsync = (req: Request, res: Response) => {
     res.status(200).json({
         status: "ok",
         message: "Logout successful"
+    })
+}
+
+export const isUserAuthorizedAsync = (req: Request, res: Response) => {
+    const role = req.session.user?.role;
+    if (!role) {
+        return res.status(403).json({
+            status: "not ok",
+            message: "User is not authorized",
+        })
+    }
+    return res.status(200).json({
+        status: "ok",
+        message: "User is Authorized",
+        data: {
+            email: req.session.user?.email,
+            role: req.session.user?.role,
+        }
     })
 }
