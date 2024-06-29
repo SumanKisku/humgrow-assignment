@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { UserRoleEnum } from "@/constants"; 
+import { UserRoleEnum } from "@/constants";
 
 const formSchema = z.object({
   email: z.string().email().min(5),
@@ -55,10 +55,21 @@ const LoginPage = () => {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
-        if (result.data.role === UserRoleEnum.Values.candidate) {
-          navigate("/dashboard");
-        } else if (result.data.role === UserRoleEnum.Values.admin) {
-          navigate("/admin");
+        switch (result.data.role) {
+          case UserRoleEnum.Values.employer:
+            navigate("/employer/dashboard");
+            return;
+          case UserRoleEnum.Values.coordinator:
+            navigate("/coordanator/dashboard");
+            return;
+          case UserRoleEnum.Values.recruiter:
+            navigate("/recruiter/dashboard");
+            return;
+          case UserRoleEnum.Values.admin:
+            navigate("/admin/dashboard");
+            return;
+          default:
+            navigate("/candidate/dashboard");
         }
       }
     });

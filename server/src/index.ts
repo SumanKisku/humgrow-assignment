@@ -2,7 +2,8 @@ import { Application, Request, Response } from "express"
 
 import express from "express";
 import cors from "cors";
-import userRouter from "./routes/user.route"
+import userRouter from "./routes/user.route";
+import jobRouter from "./routes/job.route";
 import { connectDb, connectSession } from "./connections";
 import { isAuthenticated } from "./middlewares/authentication.middle";
 import { isRoleCanditate } from "./middlewares/authrization.middle";
@@ -14,7 +15,7 @@ const port = 3000;
 const mongo_url = process.env.MONGO_URL as string;
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5050",
     credentials: true,
 }));
 app.use(express.json());
@@ -31,6 +32,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.use("/api/user", userRouter);
+app.use("/api/job", jobRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

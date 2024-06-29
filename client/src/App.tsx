@@ -3,8 +3,9 @@ import Homepage from "./screens/Homepage";
 import SignupPage from "./screens/SignupPage";
 import LoginPage from "./screens/LoginPage";
 import JobListingPage from "./screens/JobListingPage";
-import AdminPage from "./screens/AdminPage";
-import DashboardPage from "./screens/DashboardPage";
+import EmployerDashboardPage from "./screens/Employer/EmployerDashboardPage";
+import CandidateDashboardPage from "./screens/Candidate/CandidateDashboardPage";
+import AdminDashboardPage from "./screens/Admin/AdminDashboardPage";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Route path="/signup" Component={SignupPage} />
         <Route path="/login" Component={LoginPage} />
         <Route path="/jobs" Component={JobListingPage} />
-        <Route path="/admin" Component={AdminPage} />
-        <Route path="/dashboard" Component={DashboardPage} />
+        <Route path="/admin/dashboard" Component={AdminDashboardPage} />
+        <Route path="/candidate/dashboard" Component={CandidateDashboardPage} />
+        <Route path="/employer/dashboard" Component={EmployerDashboardPage} />
       </Routes>
     </BrowserRouter>
   );

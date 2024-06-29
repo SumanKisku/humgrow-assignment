@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const DashboardPage = () => {
+const CandidateDashboardPage = () => {
   const navigate = useNavigate();
   const [authData, setAuthData] = useState(null);
   const data = useAuth();
@@ -29,7 +29,7 @@ const DashboardPage = () => {
       <div>
         {authData ? (
           <div>
-        {JSON.stringify(authData)}
+            {JSON.stringify(authData)}
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         ) : (
@@ -40,4 +40,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default CandidateDashboardPage;
