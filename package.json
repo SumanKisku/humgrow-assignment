@@ -1,5 +1,5 @@
 {
-  "name": "HumGrow",
+  "name": "humgrow",
   "private": true,
   "scripts": {
     "build": "turbo build",
