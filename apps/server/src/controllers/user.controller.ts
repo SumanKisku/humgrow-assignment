@@ -1,16 +1,16 @@
-import { ZodError, z } from "zod";
+import { ZodError } from "zod";
 import bcrypt from "bcrypt";
 
 import User from "../models/user.model";
 import { Request, Response } from "express";
-import { formSchema as signupForm } from "zod-schemas";
+const { formSchema } = require("zod-schemas");
 
 const saltRounds = 10;
 
 export const signupUserAsync = async (req: Request, res: Response) => {
     try {
         // Validating user data and destructuring
-        const { name, email, password, role } = signupForm.parse(req.body);
+        const { name, email, password, role } = formSchema.parse(req.body);
         // Check no user using this email already
         const user = await User.findOne({
             email
@@ -32,7 +32,7 @@ export const signupUserAsync = async (req: Request, res: Response) => {
                 newUser.save();
             });
         });
-        
+
         res.json({
             status: "ok",
             message: "signed up",
