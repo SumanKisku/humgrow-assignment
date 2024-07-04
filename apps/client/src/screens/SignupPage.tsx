@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,26 +21,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { formSchema } from "zod-schemas";
 
-const formSchema = z
-  .object({
-    name: z
-      .string()
-      .min(4, {
-        message: "Name must be at least 4 characters",
-      })
-      .max(50),
-    email: z.string().email().min(5),
-    password: z.string().min(8),
-    confirm: z.string().min(8),
-    role: z.string(),
-  })
-  .refine((data) => data.password === data.confirm, {
-    message: "Passwords doesn't match",
-    path: ["confirm"],
-  });
-
-const roles = ["Canditate", "Recruiter", "Employer"];
+const roles = ["Candidate", "Recruiter", "Employer"];
 const SignupPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -50,14 +34,13 @@ const SignupPage = () => {
       email: "sumankisku1@gmail.com",
       password: "12345678",
       confirm: "12345678",
-      role: "candidate",
+      role: "Candidate",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
 
     // Send to the backend
     await fetch("http://localhost:3000/api/user/signup", {
@@ -75,7 +58,7 @@ const SignupPage = () => {
           description: "Try another email instead",
         });
       } else {
-        navigate("/dashboard");
+        navigate("/login");
       }
     });
   };
@@ -149,22 +132,27 @@ const SignupPage = () => {
               name="role"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>You are</FormLabel>
+                  <FormLabel>Role</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
+                        <SelectValue placeholder="Select a role" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {roles.map((role) => (
-                        <SelectItem key={role} value={`${role.toLocaleLowerCase()}`}>{role}</SelectItem>
+                        <SelectItem key={role} value={role}>
+                          {role}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
+                  <FormDescription>
+                    Are you candidate, recruiter or employer?
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

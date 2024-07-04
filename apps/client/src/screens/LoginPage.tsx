@@ -56,16 +56,16 @@ const LoginPage = () => {
         });
       } else {
         switch (result.data.role) {
-          case UserRoleEnum.Values.employer:
+          case UserRoleEnum.Values.Employer:
             navigate("/employer/dashboard");
             return;
-          case UserRoleEnum.Values.coordinator:
+          case UserRoleEnum.Values.Coordinator:
             navigate("/coordanator/dashboard");
             return;
-          case UserRoleEnum.Values.recruiter:
+          case UserRoleEnum.Values.Recruiter:
             navigate("/recruiter/dashboard");
             return;
-          case UserRoleEnum.Values.admin:
+          case UserRoleEnum.Values.Admin:
             navigate("/admin/dashboard");
             return;
           default:

@@ -1,0 +1,10 @@
+{
+  "name": "zod-schemas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}
