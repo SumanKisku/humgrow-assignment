@@ -10,7 +10,11 @@ const saltRounds = 10;
 export const signupUserAsync = async (req: Request, res: Response) => {
     try {
         // Validating user data and destructuring
+<<<<<<< HEAD:apps/server/src/controllers/user.controller.ts
         const { name, email, password, role } = formSchema.parse(req.body);
+=======
+        const { name, email, password } = signupForm.parse(req.body);
+>>>>>>> parent of 67f2619 (feat: user can select role when signing up):server/src/controllers/user.controller.ts
         // Check no user using this email already
         const user = await User.findOne({
             email
@@ -27,7 +31,7 @@ export const signupUserAsync = async (req: Request, res: Response) => {
         bcrypt.genSalt(saltRounds, function (err, salt) {
             bcrypt.hash(password, salt, function (err, hash) {
                 const newUser = new User({
-                    email, name, password: hash, role
+                    email, name, password: hash, role: "candidate"
                 });
                 newUser.save();
             });
