@@ -56,23 +56,23 @@ const LoginPage = () => {
         });
       } else {
         switch (result.data.role) {
-          case UserRoleEnum.Values.Employer:
+          case UserRoleEnum.Values.employer:
             navigate("/employer/dashboard");
             return;
-          case UserRoleEnum.Values.Coordinator:
+          case UserRoleEnum.Values.coordinator:
             navigate("/coordanator/dashboard");
             return;
-          case UserRoleEnum.Values.Recruiter:
+          case UserRoleEnum.Values.recruiter:
             navigate("/recruiter/dashboard");
             return;
-          case UserRoleEnum.Values.Admin:
+          case UserRoleEnum.Values.admin:
             navigate("/admin/dashboard");
             return;
           default:
             navigate("/candidate/dashboard");
-            if (result.data.role === UserRoleEnum.Values.Candidate) {
+            if (result.data.role === UserRoleEnum.Values.candidate) {
               navigate("/dashboard");
-            } else if (result.data.role === UserRoleEnum.Values.Admin) {
+            } else if (result.data.role === UserRoleEnum.Values.admin) {
               navigate("/admin");
             }
         }

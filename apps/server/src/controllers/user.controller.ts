@@ -44,7 +44,7 @@ export const signupUserAsync = async (req: Request, res: Response) => {
         bcrypt.genSalt(saltRounds, function (err, salt) {
             bcrypt.hash(password, salt, function (err, hash) {
                 const newUser = new User({
-                    email, name, password: hash, role: "candidate"
+                    email, name, password: hash, role: role
                 });
                 newUser.save();
             });
@@ -65,7 +65,6 @@ export const signupUserAsync = async (req: Request, res: Response) => {
         else {
             console.log(err);
         }
-
     }
 }
 

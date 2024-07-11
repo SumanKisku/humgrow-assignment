@@ -9,7 +9,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { formSchema } from "zod-schemas";
 
-const roles = ["Candidate", "Recruiter", "Employer"];
+const roles = ["candidate", "recruiter", "employer"];
 
 const SignupPage = () => {
   const { toast } = useToast();
@@ -29,7 +35,7 @@ const SignupPage = () => {
       email: "sumankisku1@gmail.com",
       password: "12345678",
       confirm: "12345678",
-      role: "Candidate",
+      role: "candidate",
     },
   });
 
@@ -129,7 +135,7 @@ const SignupPage = () => {
                 <FormItem>
                   <FormLabel>Role</FormLabel>
                   <Select
-                    onValueChange={field.onChange}
+                    onValueChange={(value) => field.onChange(value)}
                     defaultValue={field.value}
                   >
                     <FormControl>
