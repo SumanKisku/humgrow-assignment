@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { UserRoleEnum } from "@/constants"; 
+import { UserRoleEnum } from "@/constants";
 
 const formSchema = z.object({
   email: z.string().email().min(5),
@@ -55,7 +55,6 @@ const LoginPage = () => {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
-<<<<<<< HEAD:apps/client/src/screens/LoginPage.tsx
         switch (result.data.role) {
           case UserRoleEnum.Values.Employer:
             navigate("/employer/dashboard");
@@ -71,12 +70,11 @@ const LoginPage = () => {
             return;
           default:
             navigate("/candidate/dashboard");
-=======
-        if (result.data.role === UserRoleEnum.Values.candidate) {
-          navigate("/dashboard");
-        } else if (result.data.role === UserRoleEnum.Values.admin) {
-          navigate("/admin");
->>>>>>> parent of 986bb1b (Merge pull request #4 from SumanKisku/job-curd-methods):client/src/screens/LoginPage.tsx
+            if (result.data.role === UserRoleEnum.Values.Candidate) {
+              navigate("/dashboard");
+            } else if (result.data.role === UserRoleEnum.Values.Admin) {
+              navigate("/admin");
+            }
         }
       }
     });

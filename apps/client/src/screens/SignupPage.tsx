@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -16,27 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { formSchema } from "zod-schemas";
 
-<<<<<<< HEAD:apps/client/src/screens/SignupPage.tsx
 const roles = ["Candidate", "Recruiter", "Employer"];
-=======
-const formSchema = z
-  .object({
-    name: z
-      .string()
-      .min(4, {
-        message: "Name must be at least 4 characters",
-      })
-      .max(50),
-    email: z.string().email().min(5),
-    password: z.string().min(8),
-    confirm: z.string().min(8),
-  })
-  .refine((data) => data.password === data.confirm, {
-    message: "Passwords doesn't match",
-    path: ["confirm"],
-  });
 
->>>>>>> parent of 67f2619 (feat: user can select role when signing up):client/src/screens/SignupPage.tsx
 const SignupPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -47,10 +29,7 @@ const SignupPage = () => {
       email: "sumankisku1@gmail.com",
       password: "12345678",
       confirm: "12345678",
-<<<<<<< HEAD:apps/client/src/screens/SignupPage.tsx
       role: "Candidate",
-=======
->>>>>>> parent of 67f2619 (feat: user can select role when signing up):client/src/screens/SignupPage.tsx
     },
   });
 
@@ -143,7 +122,6 @@ const SignupPage = () => {
                 </FormItem>
               )}
             />
-<<<<<<< HEAD:apps/client/src/screens/SignupPage.tsx
             <FormField
               control={form.control}
               name="role"
@@ -174,8 +152,6 @@ const SignupPage = () => {
                 </FormItem>
               )}
             />
-=======
->>>>>>> parent of 67f2619 (feat: user can select role when signing up):client/src/screens/SignupPage.tsx
             <Button type="submit" className="mt-6">
               Sign Up
             </Button>
