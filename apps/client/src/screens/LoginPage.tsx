@@ -70,11 +70,6 @@ const LoginPage = () => {
             return;
           default:
             navigate("/candidate/dashboard");
-            if (result.data.role === UserRoleEnum.Values.candidate) {
-              navigate("/dashboard");
-            } else if (result.data.role === UserRoleEnum.Values.admin) {
-              navigate("/admin");
-            }
         }
       }
     });

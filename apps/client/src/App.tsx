@@ -7,8 +7,6 @@ import EmployerDashboardPage from "./screens/Employer/EmployerDashboardPage";
 import CandidateDashboardPage from "./screens/Candidate/CandidateDashboardPage";
 import AdminDashboardPage from "./screens/Admin/AdminDashboardPage";
 import RecruiterDashboardPage from "./screens/Recruiter/RecruiterDashboardPage";
-import AdminPage from "./screens/AdminPage";
-import DashboardPage from "./screens/DashboardPage";
 
 function App() {
   return (
@@ -22,8 +20,6 @@ function App() {
         <Route path="/candidate/dashboard" Component={CandidateDashboardPage} />
         <Route path="/employer/dashboard" Component={EmployerDashboardPage} />
         <Route path="/recruiter/dashboard" Component={RecruiterDashboardPage} />
-        <Route path="/admin" Component={AdminPage} />
-        <Route path="/dashboard" Component={DashboardPage} />
       </Routes>
     </BrowserRouter>
   );
