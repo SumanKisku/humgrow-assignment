@@ -1,4 +1,5 @@
 // import { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/auth";
 import { useEffect, useState } from "react";
@@ -24,19 +25,18 @@ const EmployerDashboardPage = () => {
     setAuthData(data);
   }, [data]);
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <div>
-        {authData ? (
+    <>
+      {authData ? (
+        <>
+          <Navbar name={authData} handleLogout={handleLogout} />
           <div>
-            {JSON.stringify(authData)}
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button>Create a new job ppost</Button>
           </div>
-        ) : (
-          "Not authorized"
-        )}
-      </div>
-    </div>
+        </>
+      ) : (
+        "Not authorized"
+      )}
+    </>
   );
 };
 

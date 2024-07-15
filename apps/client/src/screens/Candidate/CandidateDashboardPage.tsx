@@ -1,4 +1,5 @@
 // import { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/auth";
 import { useEffect, useState } from "react";
@@ -25,10 +26,10 @@ const CandidateDashboardPage = () => {
   }, [data]);
   return (
     <div>
-      <h1>Dashboard</h1>
       <div>
         {authData ? (
           <div>
+            <Navbar name={authData} handleLogout={handleLogout} />
             {JSON.stringify(authData)}
             <Button onClick={handleLogout}>Logout</Button>
           </div>
