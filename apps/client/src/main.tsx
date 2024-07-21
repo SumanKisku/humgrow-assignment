@@ -4,12 +4,20 @@ import App from "./App.tsx";
 import "./index.css";
 import { Toaster } from "./components/ui/toaster.tsx";
 import { CookiesProvider } from "react-cookie";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <CookiesProvider defaultSetOptions={{ path: "/" }}>
-      <App />
-    </CookiesProvider>
-    <Toaster />
+    <QueryClientProvider client={queryClient}>
+      <CookiesProvider defaultSetOptions={{ path: "/" }}>
+        <App />
+      </CookiesProvider>
+      <Toaster />
+    </QueryClientProvider>
   </React.StrictMode>
 );

@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-
+import { useQuery } from "@tanstack/react-query";
 export const useAuth = () => {
-    const [user, setUser] = useState(null);
-    useEffect(() => {
-        const fetchData = async () => {
+    console.log("auht is called");
+
+    const { data } = useQuery({
+        queryKey: ['authorized'],
+        queryFn: async () => {
             try {
                 const response = await fetch("http://localhost:3000/api/user/isauthorized", {
                     method: "GET",
@@ -11,19 +12,13 @@ export const useAuth = () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                });
-                const result = await response.json();
-                if (result.status === "ok") {
-                    setUser(result.data);
-                } else {
-                    setUser(null);
-                }
+                }).then((data) => data.json())
+                return response;
             } catch (error) {
-                setUser(null);
+                console.log(error);
             }
-        };
-        fetchData();
-    }, []);
-
-    return user;
+        }
+    })
+    console.log("🚀 ~ useAuth ~ data:", data)
+    return data;
 };
