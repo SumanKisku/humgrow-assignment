@@ -2,7 +2,8 @@ import { Application, Request, Response } from "express"
 
 import express from "express";
 import cors from "cors";
-import userRouter from "./routes/user.route"
+import userRouter from "./routes/user.route";
+import jobRouter from "./routes/job.route";
 import { connectDb, connectSession } from "./connections";
 import { isAuthenticated } from "./middlewares/authentication.middle";
 import { isRoleCanditate } from "./middlewares/authrization.middle";
@@ -31,6 +32,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.use("/api/user", userRouter);
+app.use("/api/job", jobRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

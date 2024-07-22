@@ -28,6 +28,7 @@ const roles = ["candidate", "recruiter", "employer"];
 const SignupPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

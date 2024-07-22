@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 export const useAuth = () => {
-    console.log("auht is called");
-
     const { data } = useQuery({
         queryKey: ['authorized'],
         queryFn: async () => {
@@ -19,6 +18,22 @@ export const useAuth = () => {
             }
         }
     })
-    console.log("🚀 ~ useAuth ~ data:", data)
     return data;
+};
+
+export const useLogout = () => {
+    const navigate = useNavigate();
+    useQuery({
+        queryKey: ['logout'],
+        queryFn: () => {
+            fetch("http://localhost:3000/api/user/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+        }
+    })
+    navigate("/login");
 };
